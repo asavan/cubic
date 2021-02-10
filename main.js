@@ -27,7 +27,6 @@ function renderVertex(id1, face, vertex, faceId, v, htmlV) {
 }
 
 function faceToVertex(faceId, localV) {
-    // console.log(faceId, localV);
     const map = [
         [0, 3, 7, 4],
         [2, 1, 5, 6],
@@ -40,11 +39,6 @@ function faceToVertex(faceId, localV) {
 }
 
 function renderFaces(faces, v, htmlV) {
-
-    // shedule the next update
-    // requestAnimationFrame(loop);
-
-    // let index = 0;
     for (let i = 0; i < 6; ++i) {
         // let i = index % 6;
         const face = faces[i]
@@ -61,8 +55,6 @@ function renderFaces(faces, v, htmlV) {
 
 /* Renders a vertex to the DOM
 ---------------------------------------------------------------- */
-
-
 
 
 /* Returns A, B, C and D vertices of an element
@@ -94,27 +86,12 @@ function computeVertexData(elem) {
 ---------------------------------------------------------------- */
 
 function getTransform(elem) {
-    var computedStyle = getComputedStyle(elem, null),
-        val = computedStyle.transform ||
-            computedStyle.webkitTransform ||
-            computedStyle.MozTransform ||
-            computedStyle.msTransform,
-        matrix = parseMatrix(val),
-        rotateY = Math.asin(-matrix.m13),
-        rotateX,
-        rotateZ;
-
-    rotateX = Math.atan2(matrix.m23, matrix.m33);
-    rotateZ = Math.atan2(matrix.m12, matrix.m11);
-
-    /*if (Math.cos(rotateY) !== 0) {
-        rotateX = Math.atan2(matrix.m23, matrix.m33);
-        rotateZ = Math.atan2(matrix.m12, matrix.m11);
-    } else {
-        rotateX = Math.atan2(-matrix.m31, matrix.m22);
-        rotateZ = 0;
-    }*/
-
+    const computedStyle = getComputedStyle(elem, null);
+    const val = computedStyle.transform;
+    const matrix = parseMatrix(val);
+    const rotateY = Math.asin(-matrix.m13)
+    const rotateX = Math.atan2(matrix.m23, matrix.m33);
+    const rotateZ = Math.atan2(matrix.m12, matrix.m11);
     return {
         transformStyle: val,
         matrix: matrix,
@@ -136,8 +113,8 @@ function getTransform(elem) {
 ---------------------------------------------------------------- */
 
 function parseMatrix(matrixString) {
-    var c = matrixString.split(/\s*[(),]\s*/).slice(1, -1),
-        matrix;
+    const c = matrixString.split(/\s*[(),]\s*/).slice(1, -1);
+    let matrix;
 
     if (c.length === 6) {
         // 'matrix()' (3x2)
@@ -184,7 +161,7 @@ function addVectors(v1, v2) {
 ---------------------------------------------------------------- */
 
 function rotateVector(v1, v2) {
-    var x1 = v1.x,
+    const x1 = v1.x,
         y1 = v1.y,
         z1 = v1.z,
         angleX = v2.x / 2,
@@ -224,12 +201,11 @@ function rotateVector(v1, v2) {
 
 function check(v) {
     const f = new Array(6).fill(0);
-    f[0] = v[0] + v[1] + v[2] + v[3];
-    f[1] = v[3] + v[2] + v[6] + v[7];
-    f[2] = v[4] + v[5] + v[6] + v[7];
-    f[3] = v[0] + v[1] + v[4] + v[5];
-    f[4] = v[5] + v[1] + v[2] + v[6];
-    f[5] = v[0] + v[3] + v[4] + v[7];
+    for (let i = 0; i < 6; ++i) {
+        for (let k = 0; k < 4; ++k) {
+            f[i] += v[faceToVertex(i, k)];
+        }
+    }
     f.sort((a, b) => a - b);
     for (let i = 1; i < 6; ++i) {
         if (f[i] === f[i - 1]) {
@@ -250,7 +226,6 @@ function main(window, document) {
     const error = document.querySelector(".error");
     const arr0 = new Array(8).fill(0);
     const htmlV = new Array(8);
-    renderFaces(faces, arr0, htmlV);
     input.oninput = function () {
         warn1.classList.add("hidden");
         win.classList.add("hidden");
@@ -278,7 +253,6 @@ function main(window, document) {
                 error.classList.remove("hidden");
             }
         }
-        console.log(str);
     };
 }
 

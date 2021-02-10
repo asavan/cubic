@@ -2,6 +2,23 @@
 /*    background-color: black;*/
 /*}*/
 
+:root {
+    --main-inc-color: #8a2be2;
+    --second-inc-color: #3cc0f0;
+    --enemy-inc-color: red;
+}
+
+html {
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+}
+
+
 .cube-cont {
     width: 500px;
     height: 500px;
@@ -100,8 +117,8 @@
 }
 
 .input {
-    font-size: 5rem;
-
+    font-size: 10rem;
+    width: 47rem;
 }
 
 .hidden {
@@ -123,4 +140,22 @@
 
 .win {
     background-color: greenyellow;
+}
+
+@media (max-width: 450px) {
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    .grid {
+        grid-template-columns: 1fr;
+        height: 100%;
+    }
+    .cube-cont {
+        width: 95vw;
+    }
+    .input {
+        font-size: 4.5rem;
+        width: 21rem;
+    }
 }
