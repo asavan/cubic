@@ -39,15 +39,18 @@ body {
 }
 
 .vertex {
-    width: 9px;
-    height: 9px;
+    width: 20px;
+    height: 20px;
     margin: -4px;
-    background: rgba(255, 0, 0, 0.5);
-    border-radius: 7px;
+    background: rgba(255, 0, 0, 0.8);
+    /*background: red;*/
+    /*border-radius: 7px;*/
+    border-radius: 50%;
     color: cyan;
     font: 1.5rem monospace;
-    text-indent: 14px;
+    text-indent: 5px;
     white-space: nowrap;
+    z-index: 10;
 }
 
 #scene {
