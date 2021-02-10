@@ -1,0 +1,126 @@
+/*body {*/
+/*    background-color: black;*/
+/*}*/
+
+.cube-cont {
+    width: 500px;
+    height: 500px;
+    background-color: black;
+}
+
+.vertex,
+.face,
+.assembly {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform-style: preserve-3d;
+}
+
+.face {
+    background-blend-mode: screen;
+}
+
+.vertex {
+    width: 9px;
+    height: 9px;
+    margin: -4px;
+    background: rgba(255, 0, 0, 0.5);
+    border-radius: 7px;
+    color: cyan;
+    font: 1.5rem monospace;
+    text-indent: 14px;
+    white-space: nowrap;
+}
+
+#scene {
+    width: auto;
+    height: 500px;
+    position: relative;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    perspective: 2000px;
+    transform-style: preserve-3d;
+}
+
+
+
+.cube {
+    transform: rotateX(330deg) rotateY(330deg) rotateZ(0deg);
+    /*animation: spin 20s linear infinite;*/
+}
+
+.cube .face {
+    width: 200px;
+    height: 200px;
+    margin: -100px;
+}
+
+.cube .face:nth-child(1) {
+    transform: translateZ(100px);
+    background-color: rgba(255, 255, 255, 0.73);
+}
+
+.cube .face:nth-child(2) {
+    transform: translateZ(-100px) rotateY(180deg);
+    background-color: rgba(255, 255, 255, 0.98);
+}
+
+.cube .face:nth-child(3) {
+    transform: translateX(-100px) rotateY(-90deg);
+    background-color: rgba(255, 255, 255, 0.57);
+}
+
+.cube .face:nth-child(4) {
+    transform: translateX(100px) rotateY(90deg);
+    background-color: rgba(255, 255, 255, 0.95);
+}
+
+.cube .face:nth-child(5) {
+    transform: translateY(100px) rotateX(-90deg);
+    background-color: rgba(255, 255, 255, 0.01);
+}
+
+.cube .face:nth-child(6) {
+    transform: translateY(-100px) rotateX(90deg);
+    background-color: rgba(255, 255, 255, 0.38);
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: auto 1fr;
+}
+
+.form {
+    display: grid;
+    justify-items: center;
+    align-items: center;
+}
+
+.input {
+    font-size: 5rem;
+
+}
+
+.hidden {
+    display: none;
+}
+
+.message {
+    font-size: 3rem;
+}
+
+.warn1 {
+    background-color: orange;
+}
+
+.error {
+    background-color: red;
+    color: white;
+}
+
+.win {
+    background-color: greenyellow;
+}
