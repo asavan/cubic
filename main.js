@@ -9,6 +9,9 @@ function renderVertex(id1, face, vertex, faceId, v, htmlV) {
         s = 1.5; // scale to keep the text readable
     let vertexElem = htmlV[id];
 
+    if (!v[id]) {
+        return;
+    }
     if (!vertexElem) {
         vertexElem = htmlV[id] = document.createElement("div");
         vertexElem.className = "vertex";
@@ -225,8 +228,14 @@ function main(window, document) {
     const win = document.querySelector(".win");
     const error = document.querySelector(".error");
     const arr0 = new Array(8).fill(0);
-    const htmlV = new Array(8);
-    input.oninput = function () {
+    let htmlV = new Array(8);
+    function onChange() {
+        for (let i = 0; i < 8; ++i) {
+            if (htmlV[i]) {
+                htmlV[i].remove();
+            }
+        }
+        htmlV = new Array(8);
         warn1.classList.add("hidden");
         win.classList.add("hidden");
         error.classList.add("hidden");
@@ -252,6 +261,14 @@ function main(window, document) {
             } else {
                 error.classList.remove("hidden");
             }
+        }
+    }
+    input.oninput = onChange;
+    document.onkeydown = function(evt) {
+        let isEscape = (evt.key === "Escape" || evt.key === "Esc");
+        if (isEscape) {
+            input.value = "";
+            onChange();
         }
     };
 }
