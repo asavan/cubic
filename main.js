@@ -1,6 +1,3 @@
-/* Loop
----------------------------------------------------------------- */
-
 function renderVertex(id1, face, vertex, faceId, v, htmlV) {
     const id = faceToVertex(faceId, id1);
     const x = vertex.x.toFixed(2),
@@ -271,6 +268,7 @@ function main(window, document) {
             onChange();
         }
     };
+    console.log("Version 0.3");
 }
 
 main(window, document);
