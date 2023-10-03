@@ -6,7 +6,7 @@
     <meta name="description" content="Cubic">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="theme-color" content="#ffffff">
-    <script defer src="./main.js"></script>
+    <script defer src="./main.js" type="module"></script>
     <link href="style.css" rel="stylesheet">
     <link id="favicon" rel="icon" href="./cube-1.svg" sizes="any" type="image/svg+xml">
 </head>
@@ -28,6 +28,7 @@
         <div>
             <input class="input" type="tel" autofocus minlength="8" size="5">
             <div class="message warn1 hidden">Повтор символа</div>
+            <div class="message warn2 hidden">Неверный символ</div>
             <div class="message win hidden">Верно!</div>
             <div class="message error hidden">Ошибка</div>
         </div>

@@ -41,7 +41,7 @@ function faceToVertex(faceId, localV) {
 function renderFaces(faces, v, htmlV) {
     for (let i = 0; i < 6; ++i) {
         // let i = index % 6;
-        const face = faces[i]
+        const face = faces[i];
         // Extract the elements transform
         const vertexData = computeVertexData(face);
         // Draw the vertices
@@ -89,7 +89,7 @@ function getTransform(elem) {
     const computedStyle = getComputedStyle(elem, null);
     const val = computedStyle.transform;
     const matrix = parseMatrix(val);
-    const rotateY = Math.asin(-matrix.m13)
+    const rotateY = Math.asin(-matrix.m13);
     const rotateX = Math.atan2(matrix.m23, matrix.m33);
     const rotateZ = Math.atan2(matrix.m12, matrix.m11);
     return {
@@ -222,9 +222,9 @@ function main(window, document) {
 
     const input = document.querySelector(".input");
     const warn1 = document.querySelector(".warn1");
+    const warn2 = document.querySelector(".warn2");
     const win = document.querySelector(".win");
     const error = document.querySelector(".error");
-    const arr0 = new Array(8).fill(0);
     let htmlV = new Array(8);
     function onChange() {
         for (let i = 0; i < 8; ++i) {
@@ -234,14 +234,17 @@ function main(window, document) {
         }
         htmlV = new Array(8);
         warn1.classList.add("hidden");
+        warn2.classList.add("hidden");
         win.classList.add("hidden");
         error.classList.add("hidden");
         const str = input.value;
         const arr = new Array(8).fill(0);
         let arrIndex = 0;
+        const zeroCharCode = "0".charCodeAt(0);
         for (let i = 0; i < str.length; ++i) {
-            const candidate = str[i].charCodeAt() - '0'.charCodeAt();
+            const candidate = str.charCodeAt(i) - zeroCharCode;
             if (candidate <= 0 || candidate > 8) {
+                warn2.classList.remove("hidden");
                 continue;
             }
             if (arr.includes(candidate)) {
@@ -262,13 +265,13 @@ function main(window, document) {
     }
     input.oninput = onChange;
     document.onkeydown = function(evt) {
-        let isEscape = (evt.key === "Escape" || evt.key === "Esc");
+        const isEscape = (evt.key === "Escape" || evt.key === "Esc");
         if (isEscape) {
             input.value = "";
             onChange();
         }
     };
-    console.log("Version 0.3");
+    console.log("Version 0.4");
 }
 
 main(window, document);
